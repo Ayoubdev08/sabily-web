@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://Ayoubdev08.github.io/sabily-web/sitemap.xml

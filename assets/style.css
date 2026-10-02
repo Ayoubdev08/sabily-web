@@ -1,0 +1,156 @@
+/*
+  Sabily — site vitrine.
+  Meme charte que l'app : noir #0F0F0F, or #D4AF37.
+
+  Aucune ressource externe : pas de Google Fonts, pas de CDN. Une police Google
+  chargee depuis un serveur tiers transmet l'adresse IP du visiteur a Google —
+  incoherent pour un site qui promet le respect de la vie privee (et deja juge
+  illegal par certains tribunaux allemands). Polices systeme uniquement.
+
+  Les marges utilisent des proprietes logiques (inline-start/end) : la meme
+  feuille sert le francais, l'anglais et l'arabe (droite-vers-gauche).
+*/
+
+:root {
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --surface-2: #232323;
+  --line: #2e2e2e;
+  --gold: #d4af37;
+  --gold-soft: #e8c960;
+  --text: #f2f0ea;
+  --muted: #a8a39a;
+  --radius: 18px;
+  --maxw: 1040px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", Tahoma, sans-serif;
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.skip {
+  position: absolute;
+  inset-inline-start: 12px;
+  top: -60px;
+  background: var(--gold);
+  color: #0f0f0f;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  z-index: 10;
+}
+.skip:focus { top: 12px; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
+
+/* ── En-tete ──────────────────────────────────────────────────────── */
+.site-header { border-bottom: 1px solid var(--line); }
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding-block: 14px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: var(--text); font-weight: 700; font-size: 1.15rem; }
+.brand:hover { text-decoration: none; }
+.brand img { width: 40px; height: 40px; border-radius: 10px; }
+
+.lang { display: flex; gap: 6px; flex-wrap: wrap; }
+.lang a, .lang span {
+  padding: 6px 12px; border-radius: 999px; font-size: .85rem;
+  border: 1px solid var(--line); color: var(--muted);
+}
+.lang a:hover { border-color: var(--gold); color: var(--gold); text-decoration: none; }
+.lang span[aria-current="true"] { background: var(--gold); border-color: var(--gold); color: #0f0f0f; font-weight: 700; }
+
+/* ── Hero ─────────────────────────────────────────────────────────── */
+.hero { text-align: center; padding: clamp(48px, 9vw, 96px) 0 clamp(36px, 6vw, 64px); }
+.hero img.logo {
+  width: 112px; height: 112px; border-radius: 28px;
+  box-shadow: 0 0 60px rgba(212, 175, 55, .22);
+}
+.hero h1 {
+  margin-top: 28px;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.15; letter-spacing: -.01em;
+}
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p.lead {
+  margin: 18px auto 0; max-width: 620px;
+  color: var(--muted); font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 32px; padding: 14px 26px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--text); font-weight: 600; cursor: default;
+}
+.pill::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 12px var(--gold);
+}
+
+/* ── Sections ─────────────────────────────────────────────────────── */
+section { padding: clamp(32px, 6vw, 64px) 0; }
+h2 { font-size: clamp(1.4rem, 3.4vw, 2rem); margin-bottom: 28px; text-align: center; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px 24px 26px;
+  border-block-start: 3px solid var(--gold);
+}
+/* Sept cartes sur trois colonnes laissent la derniere seule dans sa rangee :
+   elle prend alors toute la largeur plutot que de rester orpheline. */
+.grid .card:last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: .96rem; }
+
+.private {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 6px); padding: clamp(24px, 5vw, 44px);
+}
+.private ul { list-style: none; display: grid; gap: 14px; max-width: 640px; margin-inline: auto; }
+.private li { padding-inline-start: 30px; position: relative; font-size: 1.05rem; }
+.private li::before {
+  content: ""; position: absolute; inset-inline-start: 0; top: .55em;
+  width: 12px; height: 12px; border-radius: 50%; background: var(--gold);
+}
+
+/* ── Pages de texte (politique de confidentialite) ───────────────── */
+.doc { max-width: 760px; margin-inline: auto; padding-block: 40px 56px; }
+.doc .back { display: inline-block; margin-bottom: 20px; font-size: .92rem; }
+.doc h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.2; }
+.doc .badge {
+  display: inline-block; margin-top: 12px; padding: 4px 12px; border-radius: 999px;
+  background: var(--surface-2); color: var(--gold-soft); font-size: .82rem;
+}
+.doc .intro { margin-top: 22px; color: var(--muted); }
+.doc h2 { text-align: start; font-size: 1.25rem; margin: 34px 0 10px; color: var(--gold-soft); }
+.doc p { margin-top: 10px; }
+.doc ul { margin-top: 10px; padding-inline-start: 22px; display: grid; gap: 8px; }
+
+/* ── Pied de page ─────────────────────────────────────────────────── */
+.site-footer { margin-top: auto; border-top: 1px solid var(--line); padding: 28px 0 36px; color: var(--muted); font-size: .9rem; }
+.site-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.site-footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
