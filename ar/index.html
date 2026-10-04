@@ -10,6 +10,9 @@
 <link rel="alternate" hreflang="en" href="https://Ayoubdev08.github.io/sabily-web/">
 <link rel="alternate" hreflang="fr" href="https://Ayoubdev08.github.io/sabily-web/fr/">
 <link rel="alternate" hreflang="ar" href="https://Ayoubdev08.github.io/sabily-web/ar/">
+<link rel="alternate" hreflang="es" href="https://Ayoubdev08.github.io/sabily-web/es/">
+<link rel="alternate" hreflang="de" href="https://Ayoubdev08.github.io/sabily-web/de/">
+<link rel="alternate" hreflang="it" href="https://Ayoubdev08.github.io/sabily-web/it/">
 <link rel="alternate" hreflang="x-default" href="https://Ayoubdev08.github.io/sabily-web/">
 <link rel="icon" type="image/png" href="../assets/favicon-64.png">
 <link rel="apple-touch-icon" href="../assets/logo-192.png">
@@ -19,8 +22,18 @@
 <meta property="og:image" content="https://Ayoubdev08.github.io/sabily-web/assets/logo-512.png">
 <meta property="og:url" content="https://Ayoubdev08.github.io/sabily-web/ar/">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/landing.css">
+<script>
+(function(){var d=document.documentElement,ok=true;d.classList.add('js');
+try{var n=navigator;
+if(location.search.indexOf('no3d')>=0)ok=false;
+else if(matchMedia('(prefers-reduced-motion: reduce)').matches)ok=false;
+else if((n.hardwareConcurrency&&n.hardwareConcurrency<=2)||(n.deviceMemory&&n.deviceMemory<=2))ok=false;
+else{var c=document.createElement('canvas');ok=!!c.getContext('webgl2');}}catch(e){ok=false;}
+d.classList.add(ok?'is3d':'no3d');})();
+</script>
 </head>
-<body>
+<body class="landing">
 <a class="skip" href="#main">انتقل إلى المحتوى</a>
 <header class="site-header">
   <div class="wrap">
@@ -28,67 +41,148 @@
       <img src="../assets/logo-192.png" alt="" width="40" height="40">
       <span>Sabily</span>
     </a>
-    <nav class="lang" aria-label="Language">
+    <details class="lang">
+      <summary aria-label="Language"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5s-1.2 6.1-3.8 8.5c-2.6-2.4-3.8-5.2-3.8-8.5s1.2-6.1 3.8-8.5z"/></svg><span>العربية</span></summary>
+      <nav aria-label="Language">
 <a href="../" hreflang="en" lang="en">English</a>
 <a href="../fr/" hreflang="fr" lang="fr">Français</a>
 <span aria-current="true">العربية</span>
-    </nav>
+<a href="../es/" hreflang="es" lang="es">Español</a>
+<a href="../de/" hreflang="de" lang="de">Deutsch</a>
+<a href="../it/" hreflang="it" lang="it">Italiano</a>
+      </nav>
+    </details>
   </div>
 </header>
 <main id="main">
-<section class="hero">
+<div class="decor" aria-hidden="true"></div>
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+<section class="scene scene-hero" id="hero" data-screen="splash" data-side="start" aria-labelledby="h-hero">
   <div class="wrap">
-    <img class="logo" src="../assets/logo-192.png" alt="Sabily" width="112" height="112">
-    <h1>رفيقك <em>الإسلامي اليومي</em></h1>
-    <p class="lead">مواقيت الصلاة، والقرآن، والعادات اليومية، والمزيد — في تطبيق واحد هادئ يحترم خصوصيتك.</p>
-    <span class="pill" aria-disabled="true">قريبًا على Google Play</span>
-  </div>
-</section>
-<section>
-  <div class="wrap">
-    <h2>ماذا بداخله</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>مواقيت الصلاة على هاتفك</h3>
-        <p>تُحسَب المواقيت على جهازك انطلاقًا من موقعك: دون حاجة إلى خادم، وتعمل بدون اتصال بالإنترنت. بوصلة للقبلة، وضبط بالدقائق لكل صلاة ليوافق مسجدك.</p>
-      </article>
-      <article class="card">
-        <h3>القرآن صفحةً صفحة</h3>
-        <p>اقرأ صفحةً صفحة وفق ترقيم مصحف المدينة في ٦٠٤ صفحات، أو آيةً آية مع الترجمة. العلامات المرجعية وأهداف القراءة وخطط الختمة تعينك على المواظبة.</p>
-      </article>
-      <article class="card">
-        <h3>العادات والمواظبة</h3>
-        <p>تابع صلاتك وقراءتك للقرآن وأذكارك، وأضف عاداتك الخاصة، وراقب تقدّمك أسبوعيًا وشهريًا وسنويًا.</p>
-      </article>
-      <article class="card">
-        <h3>SOS للحظات الإغراء</h3>
-        <p>وقفة موجَّهة عند الحاجة: تنفّس، وآيات، وأدعية، وما ينبغي فعله الآن. تشجيع لا لوم.</p>
-      </article>
-      <article class="card">
-        <h3>أدوات العبادة اليومية</h3>
-        <p>الأدعية والأذكار، ومسبحة إلكترونية، وأسماء الله الحسنى، ومجموعة أحاديث، ومتابعة الحفظ، ومتابعة الصيام والقضاء، والتقويم الهجري.</p>
-      </article>
-      <article class="card">
-        <h3>نتعلّم وننمو معًا</h3>
-        <p>اختبارات إسلامية، وتحديات جماعية، ودوائر خاصة مع الأصدقاء والعائلة.</p>
-      </article>
-      <article class="card">
-        <h3>ست لغات</h3>
-        <p>واجهة بالإنجليزية والفرنسية والعربية والإسبانية والألمانية والإيطالية، مع دعم كامل للكتابة من اليمين إلى اليسار.</p>
-      </article>
+    <div class="copy">
+      <img class="logo" src="../assets/logo-192.png" alt="Sabily" width="96" height="96">
+      <h1 id="h-hero">رفيقك <em>الإسلامي اليومي</em></h1>
+      <p class="lead">الصلاة، والقرآن، وعاداتك، ووقفة موجَّهة في اللحظات الصعبة — في تطبيق واحد هادئ يحترم خصوصيتك.</p>
+      <span class="pill" aria-disabled="true">قريبًا على Google Play</span>
     </div>
+    <figure class="still" data-screen="splash" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span class="mouse"></span>مرّر للاكتشاف</div>
+</section>
+<section class="scene scene-habits" id="habits" data-screen="habits" data-side="end" aria-labelledby="h-habits">
+  <div class="wrap">
+    <div class="copy">
+      <p class="kicker"><span class="num">01</span>العادات</p>
+      <h2 id="h-habits">خطوات صغيرة، كل يوم.</h2>
+      <p class="text">تابع صلاتك وقراءتك للقرآن وأذكارك، وأضف عاداتك الخاصة، وشاهد سلاسل مواظبتك تكبر — أسبوعيًا وشهريًا وسنويًا.</p>
+    </div>
+    <figure class="still" data-screen="habits" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
-<section>
+<section class="scene scene-sos" id="sos" data-screen="sos" data-side="start" aria-labelledby="h-sos">
   <div class="wrap">
-    <div class="private">
-      <h2>الخصوصية أولًا</h2>
-      <ul>
-        <li>موقعك عبر GPS يبقى على هاتفك.</li>
-        <li>لا إعلانات ولا أدوات تتبّع تحليلية.</li>
-        <li>احذف حسابك وبياناتك من داخل التطبيق.</li>
+    <div class="copy">
+      <p class="kicker"><span class="num">02</span>SOS</p>
+      <h2 id="h-sos">وقفة موجَّهة حين يأتي الإغراء.</h2>
+      <p class="text">تنفّس، وآيات، وأدعية، وما ينبغي فعله الآن. سَبيلي يحصي ما غلبتَه من إغراءات، لا مرّات سقوطك. تشجيع لا لوم.</p>
+    </div>
+    <figure class="still" data-screen="sos" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-privacy" id="privacy" data-screen="privacy" data-side="end" aria-labelledby="h-privacy">
+  <div class="wrap">
+    <div class="copy">
+      <p class="kicker"><span class="num">03</span>الخصوصية</p>
+      <h2 id="h-privacy">موقعك لا يغادر هاتفك أبدًا.</h2>
+      <p class="text">تُحسَب المواقيت على الجهاز. لا إعلانات ولا أدوات تتبّع تحليلية — ويمكنك حذف حسابك وكل بياناتك من داخل التطبيق.</p>
+    </div>
+    <figure class="still" data-screen="privacy" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-prayer" id="prayer" data-screen="prayer" data-side="start" aria-labelledby="h-prayer">
+  <div class="wrap">
+    <div class="copy">
+      <p class="kicker"><span class="num">04</span>الصلاة</p>
+      <h2 id="h-prayer">مواقيت دقيقة، حتى دون إنترنت.</h2>
+      <p class="text">تُحسَب انطلاقًا من مكانك، مع تنبيهات تفعّلها واحدة واحدة، وبوصلة للقبلة، وضبط بالدقائق لكل صلاة ليوافق مسجدك.</p>
+    </div>
+    <figure class="still" data-screen="prayer" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-quran" id="quran" data-screen="quran" data-side="end" aria-labelledby="h-quran">
+  <div class="wrap">
+    <div class="copy">
+      <p class="kicker"><span class="num">05</span>القرآن</p>
+      <h2 id="h-quran">القرآن صفحةً صفحة.</h2>
+      <p class="text">النص العثماني كاملًا وفق ترقيم مصحف المدينة في ٦٠٤ صفحات، أو آيةً آية مع الترجمة. العلامات المرجعية وأهداف القراءة وخطط الختمة تعينك على المواظبة.</p>
+    </div>
+    <figure class="still" data-screen="quran" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-quiz" id="quiz" data-screen="quiz" data-side="start" aria-labelledby="h-quiz">
+  <div class="wrap">
+    <div class="copy">
+      <p class="kicker"><span class="num">06</span>الاختبارات</p>
+      <h2 id="h-quiz">تعلّم وأنت تلعب.</h2>
+      <p class="text">أكثر من ٦٠٠ سؤال في ١٢ فئة — القرآن، والحديث، والأنبياء، والفقه، والتاريخ — لتزداد علمًا قليلًا كل يوم.</p>
+    </div>
+    <figure class="still" data-screen="quiz" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-hifz" id="hifz" data-screen="hifz" data-side="end" aria-labelledby="h-hifz">
+  <div class="wrap">
+    <div class="copy">
+      <p class="kicker"><span class="num">07</span>الحفظ</p>
+      <h2 id="h-hifz">احفظ، وثبّت حفظك.</h2>
+      <p class="text">تابع حفظك سورةً سورة، مع مراجعة متباعدة تعيد إليك كل سورة في الوقت المناسب.</p>
+    </div>
+    <figure class="still" data-screen="hifz" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-more" id="more" data-screen="more" data-side="start" aria-labelledby="h-more">
+  <div class="wrap">
+    <div class="copy">
+      <h2 id="h-more">وأكثر من ذلك بكثير.</h2>
+      <ul class="chips">
+        <li>أكثر من ٩٠ دعاءً وذكرًا</li>
+        <li>مسبحة إلكترونية</li>
+        <li>أسماء الله الحسنى</li>
+        <li>أكثر من ٢٥٠ حديثًا</li>
+        <li>التقويم الهجري</li>
+        <li>متابعة الصيام</li>
+        <li>الصلوات الفائتة</li>
+        <li>تحديات جماعية</li>
+        <li>دوائر خاصة</li>
+        <li>أدوات على الشاشة الرئيسية</li>
+        <li>ست لغات</li>
+        <li>وضع فاتح وداكن</li>
       </ul>
     </div>
+    <figure class="still" data-screen="more" aria-hidden="true"><div class="still-screen"></div></figure>
+  </div>
+</section>
+<section class="scene scene-cta" id="cta" data-screen="countdown" data-side="start" aria-labelledby="h-cta">
+  <div class="wrap">
+    <div class="copy">
+      <h2 id="h-cta">قريبًا.</h2>
+      <p class="text">سَبيلي قادم قريبًا على Google Play. تابعنا لتكون من أول من يعلم.</p>
+      <div class="countdown" aria-label="الإطلاق بعد ١ فبراير ٢٠٢٧">
+        <div><span data-unit>--</span><small>أيام</small></div>
+        <div><span data-unit>--</span><small>ساعات</small></div>
+        <div><span data-unit>--</span><small>دقائق</small></div>
+        <div><span data-unit>--</span><small>ثوانٍ</small></div>
+      </div>
+      <span class="pill" aria-disabled="true">قريبًا على Google Play</span>
+      <p class="follow">تابع سَبيلي</p>
+      <ul class="social">
+        <li><span class="soc soon" aria-disabled="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" class="fill"/></svg><span>Instagram</span><small>قريبًا</small></span></li>
+        <li><span class="soc soon" aria-disabled="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 3.5v11.2a3.6 3.6 0 1 1-3.6-3.6"/><path d="M13.5 3.5c.4 2.6 2.2 4.3 5 4.6"/></svg><span>TikTok</span><small>قريبًا</small></span></li>
+        <li><span class="soc soon" aria-disabled="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.2 9.2v5.6l4.8-2.8z" class="fill"/></svg><span>YouTube</span><small>قريبًا</small></span></li>
+        <li><span class="soc soon" aria-disabled="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5c2-1.3 4-1.8 7-1.8s5 .5 7 1.8c1.4 2.7 2 5.8 1.7 9.3-1.6 1.4-3.3 2.2-5 2.6l-1-1.8h-5.4l-1 1.8c-1.7-.4-3.4-1.2-5-2.6C3 12.3 3.6 9.2 5 6.5z"/><circle cx="9.3" cy="12" r="1.3" class="fill"/><circle cx="14.7" cy="12" r="1.3" class="fill"/></svg><span>Discord</span><small>قريبًا</small></span></li>
+      </ul>
+    </div>
+    <figure class="still" data-screen="countdown" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
 </main>
@@ -100,9 +194,11 @@
     <nav>
       <a href="privacy.html">سياسة الخصوصية</a>
       <a href="../delete-account.html">حذف حسابي</a>
-      <a href="mailto:taqwaappoff@gmail.com">اتصل بنا</a>
+      <a href="mailto:sabilyofficial@gmail.com">اتصل بنا</a>
     </nav>
   </div>
 </footer>
+<script type="application/json" id="site-data">{"lang":"ar","dir":"rtl","base":"../","labels":{"nextPrayer":"الصلاة القادمة","prayerTimes":"أوقات الصلاة","dailyStreak":"السلسلة اليومية","streakDaysInARow":"🔥 {n} أيام متتالية","habitPrayer":"الصلاة","habitQuran":"قراءة القرآن","habitDhikr":"الذكر","yourHabits":"عاداتك","completedToday":"مكتمل اليوم","sosButtonWord":"أقاوم","sosTitle":"اثبُت","sosBreatheIn":"خذ نفساً عميقاً…","sosVictories":"{n} إغراءات قاومتها","sosPurposeTag":"ضد الإغراء","settings":"الإعدادات","deleteAccount":"حذف حسابي","privacySecurity":"الخصوصية","notifications":"الإشعارات","quiz":"اختبار إسلامي","catQuran":"القرآن","hifzTracker":"متابعة الحفظ","hifzMemorized":"محفوظة","hifzInProgress":"قيد التقدّم","hifzDueToday":"مستحقة اليوم","overallProgress":"التقدم العام","qibla":"القبلة","today":"اليوم","goodMorning":"صباح الخير","moreTitle":"المزيد","duasTitle":"الأدعية والأذكار","tasbeeh":"التسبيح","asmaTitle":"أسماء الله الحسنى","hadithTitle":"الأحاديث","hijriTitle":"التقويم الهجري","fastTitle":"الصيام","qadaTitle":"الصلوات الفائتة","challenges":"التحديات","myCircle":"دائرتي","navHome":"الرئيسية","navQuran":"القرآن","navHabits":"العادات","navSos":"طوارئ","navMore":"المزيد","inTime":"بعد {time}","surahNumber":"سورة {n}","juzLabel":"الجزء {n}","correct":"صحيح"},"tagline":"طريقي إلى الله","privacyRows":["الموقع — على هذا الجهاز فقط","الإعلانات — لا شيء","أدوات التتبّع — لا شيء"],"prayerNames":["الفجر","الظهر","العصر","المغرب","العشاء"],"surahNames":["الفاتحة","الإخلاص","الفلق","الناس","الملك","الكهف"],"quiz":{"q":"كم عدد سور القرآن الكريم؟","options":["١١٢","١١٣","١١٤","١١٥"],"correct":2},"fatihaTitle":"سُورَةُ ٱلْفَاتِحَةِ","fatiha":["بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ","ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","مَٰلِكِ يَوْمِ ٱلدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ","صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ"],"screens":{},"countdown":{"target":"2027-02-01T00:00:00","title":"الإطلاق بعد","units":["أيام","ساعات","دقائق","ثوانٍ"],"date":"١ فبراير ٢٠٢٧"}}</script>
+<script type="module" src="../assets/landing.js"></script>
 </body>
 </html>

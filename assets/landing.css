@@ -1,0 +1,237 @@
+/*
+  Sabily — accueil en 3D (s'ajoute a style.css).
+
+  Trois modes, choisis par le petit script place dans <head> :
+   - html.is3d : le telephone 3D (canvas #stage) traverse les scenes ;
+   - html.no3d : images fixes du telephone dans chaque scene (appareil
+     faible, animations reduites, pas de WebGL 2, ou ?no3d dans l'adresse) ;
+   - sans JavaScript : le texte seul, entierement lisible.
+
+  Le seuil « mobile » (max-width 759px OU ecran plus haut que large) doit
+  rester identique a isMobile() dans landing.js.
+*/
+
+.landing {
+  --ink: #0b0a08;
+  background:
+    radial-gradient(1200px 800px at 50% -10%, rgba(212, 175, 55, .07), transparent 60%),
+    var(--ink);
+  overflow-x: hidden;
+}
+/* Le defilement doux de style.css fausserait la synchronisation 3D. */
+html:has(body.landing) { scroll-behavior: auto; }
+
+/* ── En-tete flottant ─────────────────────────────────────────────── */
+.landing .site-header {
+  position: fixed; top: 0; inset-inline: 0; z-index: 10;
+  border-bottom: 1px solid transparent;
+  transition: background .35s ease, border-color .35s ease;
+}
+.landing .site-header.scrolled {
+  background: rgba(11, 10, 8, .9);
+  border-bottom-color: rgba(212, 175, 55, .14);
+}
+.landing .site-header .wrap { max-width: 1240px; }
+
+.progress {
+  position: fixed; top: 0; inset-inline: 0; height: 2px; z-index: 11;
+  background: linear-gradient(90deg, #8c6d1f, var(--gold), #f6dd8a);
+  transform-origin: left; transform: scaleX(var(--p, 0));
+}
+[dir="rtl"] .progress { transform-origin: right; }
+
+/* ── Fond fixe ────────────────────────────────────────────────────── */
+/* Volontairement sobre et immobile : une lueur doree sur noir, comme un
+   eclairage de studio. Les motifs animes ont ete retires (fluidite). */
+.decor {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(70vmax 55vmax at 78% 18%, rgba(212, 175, 55, .16), transparent 62%),
+    radial-gradient(60vmax 50vmax at 12% 92%, rgba(168, 130, 31, .10), transparent 60%),
+    radial-gradient(120vmax 90vmax at 50% 50%, transparent 40%, rgba(0, 0, 0, .55) 100%);
+}
+
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; display: none; }
+.is3d #stage { display: block; }
+
+/* ── Scenes ───────────────────────────────────────────────────────── */
+.landing main { position: relative; z-index: 2; }
+.landing section { padding: 0; }
+
+.scene { position: relative; min-height: 125vh; display: flex; align-items: center; }
+.scene .wrap { max-width: 1240px; padding-inline: clamp(20px, 5vw, 64px); }
+.scene-hero { min-height: 100vh; min-height: 100svh; }
+
+.copy { max-width: 470px; position: relative; }
+.scene[data-side="start"] .copy { margin-inline-end: auto; }
+.scene[data-side="end"] .copy { margin-inline-start: auto; }
+.scene[data-side="center"] .copy { margin-inline: auto; text-align: center; max-width: 620px; }
+
+.is3d .copy { will-change: opacity, transform; }
+
+.copy .logo { width: 84px; height: 84px; border-radius: 22px; box-shadow: 0 0 60px rgba(212, 175, 55, .25); }
+.copy h1 {
+  margin-top: 26px;
+  font-size: clamp(2.5rem, 5.6vw, 4.6rem); line-height: 1.04; letter-spacing: -.03em; font-weight: 800;
+}
+[dir="rtl"] .copy h1, [dir="rtl"] .copy h2 { letter-spacing: 0; line-height: 1.3; }
+.copy h1 em, .copy h2 em { font-style: normal; }
+.copy h1 em {
+  display: block;
+  background: linear-gradient(100deg, #a8821f 0%, #f3d77a 28%, #d4af37 46%, #fff3c4 56%, #c99f2e 74%, #a8821f 100%);
+  background-size: 100% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.copy .lead { margin-top: 20px; color: var(--muted); font-size: clamp(1.05rem, 1.6vw, 1.22rem); max-width: 440px; }
+.scene[data-side="center"] .copy .lead { margin-inline: auto; }
+
+.kicker {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+  color: var(--gold); font-size: .82rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+}
+[dir="rtl"] .kicker { letter-spacing: 0; font-size: .95rem; }
+.kicker .num {
+  display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, .45); font-size: .74rem; letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+.copy h2 {
+  text-align: start; margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.06; letter-spacing: -.025em; font-weight: 800;
+}
+.scene[data-side="center"] .copy h2 { text-align: center; }
+.copy .text { margin-top: 20px; color: var(--muted); font-size: clamp(1.02rem, 1.4vw, 1.16rem); }
+
+.landing .pill {
+  margin-top: 30px; border-color: rgba(212, 175, 55, .35);
+  background: rgba(26, 24, 20, .7);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, .08), 0 10px 40px rgba(212, 175, 55, .12);
+}
+
+/* « Et bien plus encore » */
+.chips {
+  list-style: none; margin-top: 28px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+}
+.chips li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px; border-radius: 12px; font-size: .95rem; line-height: 1.3;
+  background: rgba(24, 22, 18, .62); border: 1px solid rgba(212, 175, 55, .16);
+}
+.chips li::before {
+  content: ""; flex: none; width: 8px; height: 8px; background: var(--gold);
+  transform: rotate(45deg); box-shadow: 0 0 10px rgba(212, 175, 55, .6);
+}
+
+/* Appel final */
+.scene-cta { min-height: 125vh; }
+.scene[data-side="center"] .social { justify-content: center; }
+.follow { margin-top: 42px; color: var(--muted); font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; }
+[dir="rtl"] .follow { letter-spacing: 0; font-size: .95rem; }
+.social { list-style: none; margin-top: 16px; display: flex; gap: clamp(14px, 3vw, 26px); flex-wrap: wrap; }
+.soc { display: grid; justify-items: center; gap: 6px; color: var(--text); font-size: .86rem; }
+.soc .ic {
+  width: 58px; height: 58px; padding: 15px; border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, .35); background: rgba(24, 22, 18, .6); color: var(--gold);
+  transition: transform .25s ease, background .25s ease, color .25s ease;
+}
+a.soc:hover { text-decoration: none; }
+a.soc:hover .ic { transform: translateY(-3px); background: var(--gold); color: #0f0f0f; }
+.soc.soon { opacity: .7; cursor: default; }
+.soc small { color: var(--muted); font-size: .72rem; margin-top: -4px; }
+
+
+/* Compte a rebours en texte : seulement sans 3D (en 3D, il est sur l'ecran
+   du telephone, tourne en paysage). */
+.countdown { display: none; }
+.no3d .countdown { display: flex; gap: 10px; margin-top: 26px; }
+.countdown > div {
+  display: grid; justify-items: center; min-width: 72px; padding: 12px 8px 10px;
+  border-radius: 16px; background: rgba(24, 22, 18, .8); border: 1px solid rgba(212, 175, 55, .3);
+}
+.countdown span {
+  font-size: 1.9rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums;
+  color: var(--gold); direction: ltr;
+}
+.countdown small { color: var(--muted); font-size: .72rem; margin-top: 2px; }
+/* Indication de defilement */
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; translate: -50% 0;
+  display: grid; justify-items: center; gap: 10px;
+  color: var(--muted); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+}
+[dir="rtl"] .scroll-hint { letter-spacing: 0; }
+.mouse { width: 22px; height: 34px; border: 1.5px solid rgba(212, 175, 55, .6); border-radius: 12px; position: relative; }
+.mouse::after {
+  content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px;
+  border-radius: 2px; background: var(--gold); animation: wheel 1.8s ease-in-out infinite;
+}
+@keyframes wheel { 0% { opacity: 0; transform: translateY(-3px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(9px); } }
+
+.landing .site-footer { position: relative; z-index: 2; background: var(--ink); border-top-color: rgba(212, 175, 55, .14); }
+.landing .site-footer .wrap { max-width: 1240px; }
+
+/* ── Telephone fixe (mode no3d) ───────────────────────────────────── */
+.still { display: none; }
+.no3d .still {
+  display: block; flex: none; width: min(290px, 66vw); aspect-ratio: 1 / 2.05;
+  padding: 9px; border-radius: 46px;
+  background: linear-gradient(145deg, #f3d77a, #a8821f 35%, #6f5514 55%, #d4af37 80%, #8c6d1f);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 90px rgba(212, 175, 55, .18);
+}
+.no3d .still-screen {
+  width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: #0f0f0f;
+  box-shadow: inset 0 0 0 3px #050505;
+}
+.no3d .still-screen > * { display: block; width: 100%; height: 100%; object-fit: cover; }
+.no3d .scene .wrap { display: flex; align-items: center; gap: clamp(32px, 7vw, 110px); }
+.no3d .scene[data-side="end"] .wrap { flex-direction: row-reverse; }
+.no3d .scene[data-side="end"] .copy, .no3d .scene[data-side="start"] .copy { margin-inline: 0; flex: 1; }
+.no3d .scene[data-side="start"] .wrap { justify-content: space-between; }
+.no3d .scene[data-side="center"] .wrap { flex-direction: column-reverse; }
+.no3d .scene { min-height: 0; padding-block: clamp(64px, 12vh, 140px); }
+.no3d .scene-hero { min-height: 100vh; min-height: 100svh; padding-top: 110px; }
+.no3d .scene-cta { padding-bottom: 120px; }
+
+/* Apparition douce des textes (mode no3d ; en 3D, landing.js s'en charge). */
+.js.no3d .copy > *, .js.no3d .still {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+.js.no3d .in .copy > *, .js.no3d .in .still { opacity: 1; transform: none; }
+.js.no3d .in .copy > :nth-child(2) { transition-delay: .08s; }
+.js.no3d .in .copy > :nth-child(3) { transition-delay: .16s; }
+.js.no3d .in .copy > :nth-child(4) { transition-delay: .24s; }
+.js.no3d .in .copy > :nth-child(n+5) { transition-delay: .32s; }
+
+/* ── Telephone et ecran etroit ────────────────────────────────────── */
+@media (max-width: 759px), (max-aspect-ratio: 17/20) {
+  .scene { min-height: 118vh; min-height: 118svh; align-items: flex-end; padding-bottom: 7vh; }
+  .scene-hero { min-height: 100vh; min-height: 100svh; padding-bottom: 12vh; }
+  .scene .copy, .scene[data-side] .copy { margin-inline: auto; max-width: 560px; }
+
+  .is3d .scene-hero .logo { display: none; }
+  .copy h1 { font-size: clamp(2.1rem, 9vw, 3.2rem); margin-top: 0; }
+  .copy h2 { font-size: clamp(1.8rem, 7.6vw, 2.6rem); }
+  .kicker { margin-bottom: 12px; }
+  .chips { gap: 8px; }
+  .chips li { font-size: .86rem; padding: 9px 11px; }
+  .scene-cta { min-height: 125vh; padding-bottom: 10vh; }
+  .scroll-hint { display: none; }
+
+  .no3d .scene .wrap, .no3d .scene[data-side] .wrap { flex-direction: column; gap: 40px; }
+  .no3d .scene[data-side="center"] .wrap { flex-direction: column-reverse; }
+  .no3d .scene { padding-block: 72px; }
+  .no3d .scene-hero .wrap { flex-direction: column-reverse; }
+  .no3d .scene-hero { padding-top: 96px; }
+}
+
+@media (max-width: 380px) {
+  .chips { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy h1 em, .mouse::after { animation: none; }
+  .js.no3d .copy > *, .js.no3d .still { opacity: 1; transform: none; transition: none; }
+}
