@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sabily//Site//ES
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:sabily-launch-20270201-es@sabily
+DTSTAMP:20270201T000000Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:Lanzamiento de Sabily en Google Play
+DESCRIPTION:Fecha prevista de lanzamiento de Sabily en Google Play. Más i
+ nformación: https://Ayoubdev08.github.io/sabily-web/es/
+URL:https://Ayoubdev08.github.io/sabily-web/es/
+BEGIN:VALARM
+TRIGGER:PT9H
+ACTION:DISPLAY
+DESCRIPTION:Lanzamiento de Sabily en Google Play
+END:VALARM
+END:VEVENT
+END:VCALENDAR

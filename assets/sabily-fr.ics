@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sabily//Site//FR
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:sabily-launch-20270201-fr@sabily
+DTSTAMP:20270201T000000Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:Sortie de Sabily sur Google Play
+DESCRIPTION:Sortie prévue de Sabily — Mon chemin islamique sur Google P
+ lay. Infos : https://Ayoubdev08.github.io/sabily-web/fr/
+URL:https://Ayoubdev08.github.io/sabily-web/fr/
+BEGIN:VALARM
+TRIGGER:PT9H
+ACTION:DISPLAY
+DESCRIPTION:Sortie de Sabily sur Google Play
+END:VALARM
+END:VEVENT
+END:VCALENDAR

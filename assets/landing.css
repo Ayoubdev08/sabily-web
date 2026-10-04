@@ -207,7 +207,12 @@ a.soc:hover .ic { transform: translateY(-3px); background: var(--gold); color: #
 
 /* ── Telephone et ecran etroit ────────────────────────────────────── */
 @media (max-width: 759px), (max-aspect-ratio: 17/20) {
-  .scene { min-height: 118vh; min-height: 118svh; align-items: flex-end; padding-bottom: 7vh; }
+  /* Telephone 3D en haut, texte en bas : le haut du texte se place a 47 %
+     de l'ecran (33 % pour la longue liste, 40 % pour la fin). Ces valeurs
+     sont aussi dans landing.js (MOBILE_TOP). */
+  .scene { min-height: 100vh; min-height: 100svh; align-items: flex-start; padding: 47vh 0 6vh; }
+  .scene-more { padding-top: 33vh; }
+  .scene-cta { padding-top: 40vh; }
   .scene-hero { min-height: 100vh; min-height: 100svh; padding-bottom: 12vh; }
   .scene .copy, .scene[data-side] .copy { margin-inline: auto; max-width: 560px; }
 
@@ -216,8 +221,8 @@ a.soc:hover .ic { transform: translateY(-3px); background: var(--gold); color: #
   .copy h2 { font-size: clamp(1.8rem, 7.6vw, 2.6rem); }
   .kicker { margin-bottom: 12px; }
   .chips { gap: 8px; }
-  .chips li { font-size: .86rem; padding: 9px 11px; }
-  .scene-cta { min-height: 125vh; padding-bottom: 10vh; }
+  .chips li { font-size: .8rem; padding: 8px 10px; gap: 8px; }
+  .scene-cta { padding-bottom: 10vh; }
   .scroll-hint { display: none; }
 
   .no3d .scene .wrap, .no3d .scene[data-side] .wrap { flex-direction: column; gap: 40px; }
@@ -227,11 +232,45 @@ a.soc:hover .ic { transform: translateY(-3px); background: var(--gold); color: #
   .no3d .scene-hero { padding-top: 96px; }
 }
 
-@media (max-width: 380px) {
-  .chips { grid-template-columns: 1fr; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .copy h1 em, .mouse::after { animation: none; }
   .js.no3d .copy > *, .js.no3d .still { opacity: 1; transform: none; transition: none; }
 }
+
+/* Date passee (texte au lieu des chiffres) et badge devenu un vrai lien. */
+.no3d .countdown.done { display: block; font-size: 1.6rem; font-weight: 800; color: var(--gold); }
+.landing a.pill.live { color: #0f0f0f; background: var(--gold); border-color: var(--gold); text-decoration: none; }
+.landing a.pill.live::before { background: #0f0f0f; box-shadow: none; }
+
+/* Hauteur « grande » et stable de l'ecran : la barre d'adresse des
+   telephones ne redimensionne plus la scene 3D. */
+#stage { height: 100vh; height: 100lvh; }
+
+/* ── Mode image d'apercu (?og), photographie a 1200 x 630 ─────────── */
+.og .site-header, .og main > :not(#stage):not(.decor), .og .site-footer, .og .progress { display: none; }
+.og-card {
+  position: fixed; z-index: 3; top: 50%; translate: 0 -50%;
+  inset-inline-start: 84px; width: 560px;
+}
+.og-card img { width: 76px; height: 76px; border-radius: 20px; box-shadow: 0 0 50px rgba(212, 175, 55, .3); }
+.og-card h1 { margin-top: 22px; font-size: 3.6rem; line-height: 1.04; letter-spacing: -.03em; font-weight: 800; }
+[dir="rtl"] .og-card h1 { letter-spacing: 0; line-height: 1.3; }
+.og-card h1 em {
+  display: block; font-style: normal;
+  background: linear-gradient(100deg, #a8821f 0%, #f3d77a 28%, #d4af37 46%, #fff3c4 56%, #c99f2e 74%, #a8821f 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.og-card p { margin-top: 22px; color: var(--muted); font-size: 1.25rem; }
+.og-card .pill { margin-top: 12px; font-size: 1.15rem; }
+
+/* Bouton « Ajouter a mon agenda » (fichier .ics, aucune donnee collectee). */
+.cal {
+  display: flex; width: fit-content; align-items: center; gap: 10px; margin-top: 14px;
+  padding: 12px 22px; border-radius: 999px; font-weight: 600;
+  color: var(--gold); border: 1px solid rgba(212, 175, 55, .45); background: rgba(24, 22, 18, .6);
+  transition: background .2s ease, color .2s ease;
+}
+.landing .copy .cal { margin-inline-start: 0; }
+.cal:hover { background: var(--gold); color: #0f0f0f; text-decoration: none; }
+.cal .ic { width: 20px; height: 20px; }

@@ -19,7 +19,10 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sabily — My Islamic Path">
 <meta property="og:description" content="Sabily: prayer times calculated on your phone, the Quran, daily habits, an anti-temptation SOS and more. No ads, and respectful of your privacy.">
-<meta property="og:image" content="https://Ayoubdev08.github.io/sabily-web/assets/logo-512.png">
+<meta property="og:image" content="https://Ayoubdev08.github.io/sabily-web/assets/og-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:url" content="https://Ayoubdev08.github.io/sabily-web/">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/landing.css">
@@ -90,54 +93,34 @@ d.classList.add(ok?'is3d':'no3d');})();
     <figure class="still" data-screen="sos" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
-<section class="scene scene-privacy" id="privacy" data-screen="privacy" data-side="end" aria-labelledby="h-privacy">
+<section class="scene scene-prayer" id="prayer" data-screen="prayer" data-side="end" aria-labelledby="h-prayer">
   <div class="wrap">
     <div class="copy">
-      <p class="kicker"><span class="num">03</span>Privacy</p>
-      <h2 id="h-privacy">Your position never leaves your phone.</h2>
-      <p class="text">Prayer times are worked out on the device. No ads, no analytics trackers — and you can delete your account and all your data from inside the app.</p>
-    </div>
-    <figure class="still" data-screen="privacy" aria-hidden="true"><div class="still-screen"></div></figure>
-  </div>
-</section>
-<section class="scene scene-prayer" id="prayer" data-screen="prayer" data-side="start" aria-labelledby="h-prayer">
-  <div class="wrap">
-    <div class="copy">
-      <p class="kicker"><span class="num">04</span>Prayer</p>
-      <h2 id="h-prayer">Accurate times, even offline.</h2>
-      <p class="text">Calculated from where you are, with reminders you turn on one by one, a Qibla compass, and a few minutes of adjustment per prayer to match your mosque.</p>
+      <p class="kicker"><span class="num">03</span>Prayer</p>
+      <h2 id="h-prayer">Accurate times, and your position stays yours.</h2>
+      <p class="text">Prayer times are calculated on your phone, even offline — your location never leaves it. Reminders you turn on one by one, a Qibla compass, and a few minutes of adjustment per prayer to match your mosque. No ads, no trackers.</p>
     </div>
     <figure class="still" data-screen="prayer" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
-<section class="scene scene-quran" id="quran" data-screen="quran" data-side="end" aria-labelledby="h-quran">
+<section class="scene scene-quran" id="quran" data-screen="quran" data-side="start" aria-labelledby="h-quran">
   <div class="wrap">
     <div class="copy">
-      <p class="kicker"><span class="num">05</span>Quran</p>
+      <p class="kicker"><span class="num">04</span>Quran</p>
       <h2 id="h-quran">The Quran, page by page.</h2>
       <p class="text">The full Uthmani text following the 604-page Madani pagination, or verse by verse with translation. Bookmarks, reading goals and Khatma plans keep you consistent.</p>
     </div>
     <figure class="still" data-screen="quran" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
-<section class="scene scene-quiz" id="quiz" data-screen="quiz" data-side="start" aria-labelledby="h-quiz">
+<section class="scene scene-learn" id="learn" data-screen="quiz" data-side="end" aria-labelledby="h-learn">
   <div class="wrap">
     <div class="copy">
-      <p class="kicker"><span class="num">06</span>Quiz</p>
-      <h2 id="h-quiz">Learn while you play.</h2>
-      <p class="text">600+ questions across 12 categories — Quran, hadith, prophets, fiqh, history — to grow your knowledge a little every day.</p>
+      <p class="kicker"><span class="num">05</span>Learn</p>
+      <h2 id="h-learn">Learn, and remember.</h2>
+      <p class="text">600+ quiz questions across 12 categories — Quran, hadith, prophets, fiqh, history — and a hifz tracker that follows your memorisation surah by surah, with spaced repetition to review each one at the right time.</p>
     </div>
     <figure class="still" data-screen="quiz" aria-hidden="true"><div class="still-screen"></div></figure>
-  </div>
-</section>
-<section class="scene scene-hifz" id="hifz" data-screen="hifz" data-side="end" aria-labelledby="h-hifz">
-  <div class="wrap">
-    <div class="copy">
-      <p class="kicker"><span class="num">07</span>Hifz</p>
-      <h2 id="h-hifz">Memorise, and keep it.</h2>
-      <p class="text">Follow your memorisation surah by surah, with spaced repetition that brings each one back at the right time.</p>
-    </div>
-    <figure class="still" data-screen="hifz" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
 <section class="scene scene-more" id="more" data-screen="more" data-side="start" aria-labelledby="h-more">
@@ -162,7 +145,7 @@ d.classList.add(ok?'is3d':'no3d');})();
     <figure class="still" data-screen="more" aria-hidden="true"><div class="still-screen"></div></figure>
   </div>
 </section>
-<section class="scene scene-cta" id="cta" data-screen="countdown" data-side="start" aria-labelledby="h-cta">
+<section class="scene scene-cta" id="cta" data-screen="countdown" data-side="end" aria-labelledby="h-cta">
   <div class="wrap">
     <div class="copy">
       <h2 id="h-cta">Coming soon.</h2>
@@ -174,6 +157,7 @@ d.classList.add(ok?'is3d':'no3d');})();
         <div><span data-unit>--</span><small>Seconds</small></div>
       </div>
       <span class="pill" aria-disabled="true">Coming soon to Google Play</span>
+      <a class="cal" href="assets/sabily-en.ics" download><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>Add to my calendar</a>
       <p class="follow">Follow Sabily</p>
       <ul class="social">
         <li><span class="soc soon" aria-disabled="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" class="fill"/></svg><span>Instagram</span><small>Soon</small></span></li>
@@ -195,10 +179,11 @@ d.classList.add(ok?'is3d':'no3d');})();
       <a href="privacy.html">Privacy policy</a>
       <a href="delete-account.html">Delete my account</a>
       <a href="mailto:sabilyofficial@gmail.com">Contact</a>
+      
     </nav>
   </div>
 </footer>
-<script type="application/json" id="site-data">{"lang":"en","dir":"ltr","base":"","labels":{"nextPrayer":"Next Prayer","prayerTimes":"Prayer Times","dailyStreak":"Daily Streak","streakDaysInARow":"🔥 {n} days in a row","habitPrayer":"Prayer","habitQuran":"Quran Reading","habitDhikr":"Dhikr","yourHabits":"Your Habits","completedToday":"Completed today","sosButtonWord":"I resist","sosTitle":"Stay strong","sosBreatheIn":"Breathe in deeply…","sosVictories":"{n} temptations resisted","sosPurposeTag":"Anti-temptation","settings":"Settings","deleteAccount":"Delete my account","privacySecurity":"Privacy & Security","notifications":"Notifications","quiz":"Islamic Quiz","catQuran":"Quran","hifzTracker":"Hifz Tracker","hifzMemorized":"Memorized","hifzInProgress":"In Progress","hifzDueToday":"Due Today","overallProgress":"Overall Progress","qibla":"Qibla","today":"Today","goodMorning":"Good morning","moreTitle":"More","duasTitle":"Duas & Adhkar","tasbeeh":"Tasbeeh","asmaTitle":"99 Names of Allah","hadithTitle":"Hadith","hijriTitle":"Hijri calendar","fastTitle":"Fasting","qadaTitle":"Qada Prayers","challenges":"Challenges","myCircle":"My Circle","navHome":"Home","navQuran":"Quran","navHabits":"Habits","navSos":"SOS","navMore":"More","inTime":"in {time}","surahNumber":"Surah {n}","juzLabel":"Juz {n}","correct":"Correct"},"tagline":"My Islamic Path","privacyRows":["Location — on this device only","Ads — none","Analytics trackers — none"],"prayerNames":["Fajr","Dhuhr","Asr","Maghrib","Isha"],"surahNames":["Al-Fatiha","Al-Ikhlas","Al-Falaq","An-Nas","Al-Mulk","Al-Kahf"],"quiz":{"q":"How many surahs are in the Quran?","options":["112","113","114","115"],"correct":2},"fatihaTitle":"سُورَةُ ٱلْفَاتِحَةِ","fatiha":["بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ","ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","مَٰلِكِ يَوْمِ ٱلدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ","صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ"],"screens":{},"countdown":{"target":"2027-02-01T00:00:00","title":"Launch in","units":["Days","Hours","Minutes","Seconds"],"date":"1 February 2027"}}</script>
+<script type="application/json" id="site-data">{"lang":"en","dir":"ltr","base":"","labels":{"nextPrayer":"Next Prayer","prayerTimes":"Prayer Times","dailyStreak":"Daily Streak","streakDaysInARow":"🔥 {n} days in a row","habitPrayer":"Prayer","habitQuran":"Quran Reading","habitDhikr":"Dhikr","yourHabits":"Your Habits","completedToday":"Completed today","sosButtonWord":"I resist","sosTitle":"Stay strong","sosBreatheIn":"Breathe in deeply…","sosVictories":"{n} temptations resisted","sosPurposeTag":"Anti-temptation","settings":"Settings","deleteAccount":"Delete my account","privacySecurity":"Privacy & Security","notifications":"Notifications","quiz":"Islamic Quiz","catQuran":"Quran","hifzTracker":"Hifz Tracker","hifzMemorized":"Memorized","hifzInProgress":"In Progress","hifzDueToday":"Due Today","overallProgress":"Overall Progress","qibla":"Qibla","today":"Today","goodMorning":"Good morning","moreTitle":"More","duasTitle":"Duas & Adhkar","tasbeeh":"Tasbeeh","asmaTitle":"99 Names of Allah","hadithTitle":"Hadith","hijriTitle":"Hijri calendar","fastTitle":"Fasting","qadaTitle":"Qada Prayers","challenges":"Challenges","myCircle":"My Circle","navHome":"Home","navQuran":"Quran","navHabits":"Habits","navSos":"SOS","navMore":"More","inTime":"in {time}","surahNumber":"Surah {n}","juzLabel":"Juz {n}","correct":"Correct"},"tagline":"My Islamic Path","prayerNames":["Fajr","Dhuhr","Asr","Maghrib","Isha"],"surahNames":["Al-Fatiha","Al-Ikhlas","Al-Falaq","An-Nas","Al-Mulk","Al-Kahf"],"quiz":{"q":"How many surahs are in the Quran?","options":["112","113","114","115"],"correct":2},"fatihaTitle":"سُورَةُ ٱلْفَاتِحَةِ","fatiha":["بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ","ٱلرَّحْمَٰنِ ٱلرَّحِيمِ","مَٰلِكِ يَوْمِ ٱلدِّينِ","إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ","صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ"],"screens":{},"countdown":{"target":"2027-02-01T00:00:00","title":"Launch in","units":["Days","Hours","Minutes","Seconds"],"date":"1 February 2027","soon":"Very soon","available":null}}</script>
 <script type="module" src="assets/landing.js"></script>
 </body>
 </html>

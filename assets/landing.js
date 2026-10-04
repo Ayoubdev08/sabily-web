@@ -28,6 +28,19 @@ const sections = [...document.querySelectorAll('.scene')];
 const copies = sections.map((s) => s.querySelector('.copy'));
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// `?og` : mode « image d'apercu » (1200 x 630), photographie par l'outil de
+// generation pour les partages sur les reseaux. Jamais vu des visiteurs.
+const OG = new URLSearchParams(location.search).has('og');
+if (OG) {
+  root.classList.add('og');
+  const card = document.createElement('div');
+  card.className = 'og-card';
+  const hero = document.querySelector('.scene-hero');
+  card.innerHTML = `<img src="${data.base}assets/logo-192.png" alt=""><h1>${hero.querySelector('h1').innerHTML}</h1>`
+    + `<p>${hero.querySelector('.pill').textContent}</p><span class="pill">${data.countdown.date}</span>`;
+  document.body.appendChild(card);
+}
+
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (e0, e1, x) => {
@@ -416,35 +429,6 @@ const SCREENS = {
     navBar(p, 'shield');
   },
 
-  privacy(p) {
-    background(p, 0.22);
-    statusBar(p);
-    title(p, L.settings);
-    const g = p.g;
-    // Grand bouclier.
-    g.save(); g.shadowColor = goldA(0.6); g.shadowBlur = 50;
-    ICONS.shield(g, SW / 2, 345, 100, C.gold);
-    g.restore();
-    ICONS.lock(g, SW / 2, 352, 34, C.gold);
-    p.text(L.privacySecurity, 44, 520, { size: 25, weight: 700, color: C.gold, maxW: SW - 88 });
-    p.rr(36, 546, SW - 72, 336, 28, C.card, C.line, 2);
-    data.privacyRows.forEach((row, k) => {
-      const y = 546 + k * 112;
-      if (k) p.g.fillStyle = C.line, p.g.fillRect(p.X(76, SW - 112), y, SW - 112, 2);
-      icon(p, 'check', 96, y + 56, 19);
-      p.text(row, 140, y + 66, { size: 27, weight: 600, maxW: SW - 210 });
-    });
-    p.rr(36, 912, SW - 72, 112, 28, C.card, C.line, 2);
-    icon(p, 'bell', 96, 968, 20, C.muted);
-    p.text(L.notifications, 140, 978, { size: 29, weight: 600, maxW: SW - 330 });
-    p.rr(SW - 72 - 30 - 84, 948, 84, 44, 22, C.gold);
-    p.circle(RTL ? SW - 72 - 30 - 84 + 22 : SW - 72 - 30 - 22, 970, 17, C.ink);
-    p.rr(36, 1054, SW - 72, 112, 28, 'rgba(226,116,98,0.08)', 'rgba(226,116,98,0.35)', 2);
-    icon(p, 'trash', 96, 1110, 20, C.red);
-    p.text(L.deleteAccount, 140, 1120, { size: 29, weight: 600, color: C.red, maxW: SW - 210 });
-    navBar(p, 'grid');
-  },
-
   prayer(p) {
     background(p, 0.2);
     statusBar(p);
@@ -573,41 +557,6 @@ const SCREENS = {
     navBar(p, 'grid');
   },
 
-  hifz(p) {
-    const g = p.g;
-    background(p, 0.22);
-    statusBar(p);
-    title(p, L.hifzTracker);
-    p.rr(36, 224, SW - 72, 300, 32, C.card, C.line, 2);
-    const cx = 168, cy = 374, rad = 100;
-    p.circle(cx, cy, rad, null, C.card2, 22);
-    g.beginPath();
-    g.arc(p.X(cx), cy, rad, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * 0.14 * (RTL ? -1 : 1), RTL);
-    stroke(g, C.gold, 22);
-    p.text('14%', cx, cy + 16, { size: 44, weight: 800, align: 'center' });
-    p.text(L.overallProgress, 310, 352, { size: 27, color: C.muted, maxW: SW - 380 });
-    p.text('16/114', 310, 412, { size: 46, weight: 800, color: C.gold });
-    const stats = [[12, L.hifzMemorized], [3, L.hifzInProgress], [2, L.hifzDueToday]];
-    const bw = (SW - 72 - 40) / 3;
-    stats.forEach(([n, label], k) => {
-      const x = 36 + k * (bw + 20);
-      p.rr(x, 556, bw, 150, 26, k === 2 ? goldA(0.14) : C.card, k === 2 ? goldA(0.6) : C.line, 2);
-      p.text(String(n), x + bw / 2, 632, { size: 50, weight: 800, color: k === 2 ? C.gold : C.text, align: 'center' });
-      p.text(label, x + bw / 2, 680, { size: 22, color: C.muted, align: 'center', maxW: bw - 20 });
-    });
-    const rows = [[0, 1], [1, 1], [3, 1], [4, 0.45], [5, 0.12]];
-    rows.forEach(([idx, prog], k) => {
-      const y = 740 + k * 104;
-      p.rr(36, y, SW - 72, 90, 24, C.card, C.line, 2);
-      p.text(String(data.surahNames[idx]), 76, y + 56, { size: 30, weight: 700, maxW: 300 });
-      const bx = SW - 76 - 200;
-      p.rr(bx, y + 40, 200, 12, 6, C.card2);
-      p.rr(RTL ? bx + 200 * (1 - prog) : bx, y + 40, 200 * prog, 12, 6, prog >= 1 ? C.gold : goldA(0.6));
-      if (k === 3) p.circle(bx - 34, y + 46, 9, C.gold);
-    });
-    navBar(p, 'book');
-  },
-
   more(p) {
     const g = p.g;
     background(p, 0.2);
@@ -663,6 +612,15 @@ SCREENS.countdown = (p) => {
   g.direction = RTL ? 'rtl' : 'ltr';
   g.fillStyle = C.muted;
   g.font = `600 40px ${UI}`;
+  // Date passee : « Disponible sur Google Play » si le lien existe, sinon
+  // « Tres bientot » (Google a pu retarder la sortie) — jamais « 00 00 00 00 ».
+  if (LAUNCH <= Date.now()) {
+    g.fillStyle = goldFill(g, 0, 250, W, 420);
+    g.font = `800 120px ${UI}`;
+    g.fillText(data.countdown.available || data.countdown.soon, W / 2, 400, W - 140);
+    g.restore();
+    return;
+  }
   g.fillText(data.countdown.title, W / 2, 128);
   const parts = countdownParts();
   const bw = 290, gap = 36, x0 = (W - (bw * 4 + gap * 3)) / 2;
@@ -733,25 +691,42 @@ async function loadAssets() {
    2. Defilement : positions des scenes
    ════════════════════════════════════════════════════════════════════ */
 
-let vw = innerWidth, vh = innerHeight, mobile = isMobile();
-let stops = [], centers = [], maxScroll = 1;
+// Sur telephone, la barre d'adresse apparait et disparait en defilant, ce qui
+// change innerHeight sans cesse : le telephone 3D sautait et tout etait
+// recalcule. On mesure plutot la hauteur « grande » de l'ecran (100lvh),
+// qui, elle, ne bouge pas.
+const vhProbe = document.createElement('div');
+vhProbe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;height:100lvh;visibility:hidden;pointer-events:none';
+document.body.appendChild(vhProbe);
+const stableHeight = () => vhProbe.offsetHeight || innerHeight;
 
-const anchorRatio = () => (mobile ? 0.68 : 0.5);
+let vw = innerWidth, vh = stableHeight(), mobile = isMobile();
+let stops = [], centers = [], tops = [], maxScroll = 1;
+
+// Point de repos de chaque texte : sur ordinateur, son centre au milieu de
+// l'ecran ; sur telephone, son HAUT juste sous le telephone 3D (le texte
+// occupe le bas de l'ecran). Valeurs identiques aux padding-top de
+// landing.css (section mobile).
+const MOBILE_TOP = { more: 0.33, cta: 0.4 };
+const mobileTop = (k) => MOBILE_TOP[sections[k].id] ?? 0.47;
+/** Ecart (en hauteurs d'ecran) entre le texte k et son point de repos. */
+const offsetOf = (k, y) => (mobile
+  ? (tops[k] - y) / vh - mobileTop(k)
+  : (centers[k] - y) / vh - 0.5);
 
 function measure() {
-  vw = innerWidth; vh = innerHeight; mobile = isMobile();
+  vw = innerWidth; vh = stableHeight(); mobile = isMobile();
   maxScroll = Math.max(1, document.documentElement.scrollHeight - vh);
   const y = scrollY;
   // Les textes sont decales par l'animation : on retire ce decalage pour
   // mesurer leur vraie place (sinon les scenes lointaines sont mal reperees).
   const saved = copies.map((c) => c.style.transform);
   copies.forEach((c) => { c.style.transform = 'none'; });
-  centers = copies.map((c) => {
-    const r = c.getBoundingClientRect();
-    return r.top + y + r.height / 2;
-  });
+  const rects = copies.map((c) => c.getBoundingClientRect());
+  centers = rects.map((r) => r.top + y + r.height / 2);
+  tops = rects.map((r) => r.top + y);
   copies.forEach((c, k) => { c.style.transform = saved[k]; });
-  stops = centers.map((c) => clamp(c - vh * anchorRatio(), 0, maxScroll));
+  stops = copies.map((_, k) => clamp(y + offsetOf(k, y) * vh, 0, maxScroll));
   for (let i = 1; i < stops.length; i++) stops[i] = Math.max(stops[i], stops[i - 1] + 1);
 }
 
@@ -789,7 +764,14 @@ async function startFallback() {
   sections.forEach((s) => io.observe(s));
   // Compte a rebours en texte (en 3D, il est sur l'ecran du telephone).
   const cd = document.querySelectorAll('.countdown [data-unit]');
-  const tick = () => countdownParts().forEach((n, k) => { if (cd[k]) cd[k].textContent = String(n).padStart(2, '0'); });
+  const box = document.querySelector('.countdown');
+  const tick = () => {
+    if (LAUNCH <= Date.now()) { // date passee : texte a la place des chiffres
+      if (box) { box.textContent = data.countdown.available || data.countdown.soon; box.classList.add('done'); }
+      return;
+    }
+    countdownParts().forEach((n, k) => { if (cd[k]) cd[k].textContent = String(n).padStart(2, '0'); });
+  };
   tick();
   setInterval(tick, 1000);
 
@@ -834,10 +816,11 @@ const PW = 1.0, PH = 2.06, PD = 0.11, PR = 0.16, BEV = 0.026;
 const SCW = 0.93, SCH = 1.99;
 
 // Une pose par scene. side : +1 = telephone a droite (en francais).
-const SCENE_MAG = { hero: 0.55, habits: 0.32, sos: 0.38, privacy: 0.3, prayer: 0.36, quran: 0.2, quiz: 0.34, hifz: 0.3, more: 0.4, cta: 0.42 };
-const SCENE_SPIN = { privacy: 1, more: -1 };
+const SCENE_MAG = { hero: 0.55, habits: 0.32, sos: 0.38, prayer: 0.34, quran: 0.22, learn: 0.34, more: 0.4, cta: 0.42 };
+const SCENE_SPIN = { prayer: 1, more: -1 };
 
 function poseFor(i) {
+  if (OG) return { nx: RTL ? -0.5 : 0.5, ny: 0, h: 0.8, ry: RTL ? 0.42 : -0.42, rx: 0.05, rz: RTL ? -0.05 : 0.05, spin: 0 };
   const s = sections[i];
   const id = s.id;
   const side = s.dataset.side;
@@ -856,8 +839,8 @@ function poseFor(i) {
     const small = id === 'more';
     return {
       nx: 0,
-      ny: small ? 0.54 : id === 'hero' ? 0.4 : 0.44,
-      h: small ? 0.27 : id === 'hero' ? 0.46 : 0.4,
+      ny: small ? 0.62 : 0.49,
+      h: small ? 0.22 : 0.36,
       ry: alt * (small ? 0.3 : 0.24), rx: 0.06, rz: 0,
       spin: SCENE_SPIN[id] || 0,
     };
@@ -981,7 +964,8 @@ async function start3D() {
   const canvas = document.getElementById('stage');
   let renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    // Ecran tres dense (telephones) : l'anticrenelage ne se voit plus, mais coute cher.
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: !(isMobile() && devicePixelRatio >= 2), alpha: true, powerPreference: 'high-performance' });
   } catch {
     return startFallback();
   }
@@ -1045,6 +1029,7 @@ async function start3D() {
   const screen = new THREE.Mesh(roundedPlane(THREE, SCW, SCH, PR - 0.035), screenMat);
   screen.position.z = PD / 2 + 0.0012;
   phone.add(screen);
+  if (OG) screenNames.fill('habits');
 
   // Dos : panneau brosse avec le logo, bloc photo, boutons.
   const back = new THREE.Mesh(roundedPlane(THREE, SCW, SCH, PR - 0.035),
@@ -1076,11 +1061,18 @@ async function start3D() {
 
   // ── Taille ──
   let dirty = true; // une image a redessiner (redimensionnement, compte a rebours)
+  // Plafond de resolution : au-dela de 1,5, le gain est invisible a l'oeil
+  // mais le cout pour la carte graphique double. Abaisse a 1 si l'appareil
+  // peine (voir la surveillance plus bas).
+  let pixelCap = 1.5;
+  let lastW = -1, lastH = -1;
   function resize() {
+    // Telephone : la barre d'adresse qui bouge ne change ni la largeur ni la
+    // hauteur stable — rien a refaire.
+    if (innerWidth === lastW && stableHeight() === lastH) return;
+    lastW = innerWidth; lastH = stableHeight();
     measure();
-    // Plafond de resolution : au-dela de 1,5, le gain est invisible a l'oeil
-    // mais le cout pour la carte graphique double.
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, pixelCap));
     renderer.setSize(vw, vh, false);
     camera.aspect = vw / vh;
     camera.updateProjectionMatrix();
@@ -1099,6 +1091,14 @@ async function start3D() {
       pointer.ty = (e.clientY / vh) * 2 - 1;
     }, { passive: true });
   }
+
+  // Tout est prepare des le depart : chaque ecran est dessine et envoye a la
+  // carte graphique, et les effets de rendu sont compiles. Sans cela, chaque
+  // ecran decouvert en plein defilement (et le premier tour du telephone)
+  // provoquait un a-coup.
+  for (const name of new Set(screenNames)) renderer.initTexture(texFor(name));
+  renderer.initTexture(back.material.map);
+  renderer.compile(scene, camera);
 
   // ── Boucle ──
   // On ne dessine une image que si quelque chose a bouge : immobile, la page
@@ -1126,7 +1126,7 @@ async function start3D() {
 
     const y = scrollY;
     const fTarget = sceneFloat(y);
-    const intro = reduceMotion ? 1 : smooth(0, 1, time / 1.6);
+    const intro = reduceMotion || OG ? 1 : smooth(0, 1, time / 1.6);
     const moving = Math.abs(fTarget - fCur) > 1e-4
       || Math.abs(pointer.tx - pointer.x) > 1e-3 || Math.abs(pointer.ty - pointer.y) > 1e-3;
 
@@ -1142,9 +1142,16 @@ async function start3D() {
     // Surveillance : si les premieres images sont trop lentes, repli.
     // (`?force3d` dans l'adresse la desactive, pour les tests.)
     frames++;
+    // Premier signe de lenteur : on baisse la resolution et on remesure ;
+    // le repli en images fixes ne vient qu'en second recours.
     if (frames > 20 && frames <= 80) slowSum += dt;
-    if (frames === 80 && slowSum / 60 > 1 / 24 && !location.search.includes('force3d')) {
-      teardown(); startFallback(); return;
+    if (frames === 80 && slowSum / 60 > 1 / 24 && !OG && !location.search.includes('force3d')) {
+      if (pixelCap > 1) {
+        pixelCap = 1; lastW = -1; resize();
+        frames = 0; slowSum = 0;
+      } else {
+        teardown(); startFallback(); return;
+      }
     }
 
     updateChrome(y);
@@ -1189,11 +1196,11 @@ async function start3D() {
     // Textes : chacun apparait quand sa scene est au centre. On n'ecrit dans
     // la page que ce qui a vraiment change.
     for (let k = 0; k < copies.length; k++) {
-      const d = (centers[k] - y - vh * anchorRatio()) / vh;
+      const d = offsetOf(k, y);
       // Sur telephone, le texte s'efface vite en montant (il passerait sous
       // le telephone 3D) mais apparait tot en arrivant par le bas.
       const o = mobile
-        ? 1 - (d < 0 ? smooth(0.08, 0.2, -d) : smooth(0.2, 0.4, d))
+        ? 1 - (d < 0 ? smooth(0.05, 0.15, -d) : smooth(0.28, 0.48, d))
         : 1 - smooth(0.2, 0.42, Math.abs(d));
       const ty = Math.round(-clamp(d, -1, 1) * (mobile ? 30 : 70));
       const ls = lastStyle[k];
